@@ -18,7 +18,7 @@
   </div>
 
   <div class="Slides-slide">
-    <img width="250" src="https://www.thehaguetech.com/images/THT_Anim_once.gif" />
+    <img src="https://www.thehaguetech.com/images/THT_Anim_once.gif" />
     <h5>thehaguetech.com/<span>events</span></h5>
   </div>
 

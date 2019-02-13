@@ -1,0 +1,75 @@
+.Schedule {
+  max-width: calc(100% - 30px);
+  height: 90vh;
+  position: relative;
+  overflow: hidden;
+  overflow-x: auto;
+  margin: 15px 15px 25px 15px;
+  border: solid 5px #0fd9a3;
+}
+
+.Day {
+  height: 100%;
+  white-space: nowrap;
+  position: relative;
+}
+
+.ScheduleHours,
+.ScheduleForSpace {
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  min-width: 25px;
+  background: #fff;
+  border-right: solid #eee 2px;
+}
+.ScheduleHours {
+  height: 100%;
+  text-align: center;
+  position: sticky;
+  left: 0;
+}
+.ScheduleForSpace {
+  width: 200px;
+}
+.ScheduleForSpace:last-child {
+  border-right: none;
+}
+.ScheduleHours > div,
+.ScheduleForSpace > div {
+  margin: 5px 0;
+}
+
+.ScheduleHeader {
+  background: #eee;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.ScheduleHours-timeslots {
+  height: calc(100% - 50px);
+}
+.ScheduleHours-timeslots > div {
+  height: 7%;
+}
+
+.ScheduleForSpace-session.active {
+  background-color: #0fd9a3;
+  white-space: normal;
+  padding: 5px 5px;
+  font-size: 12px;
+}
+.ScheduleForSpace-session.active:hover {
+  background-color: #ff0;
+}
+
+.Session-title {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+.Session-host {
+  display: block;
+}

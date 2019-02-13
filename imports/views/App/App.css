@@ -1,0 +1,23 @@
+.App {
+  width: 780px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.Text {
+  padding: 5px 15px;
+  line-height: 25px;
+}
+
+.button {
+  border-radius: 10px;
+  display: inline;
+  background-color: gray;
+  border: none;
+  color: #fff;
+  padding: 2px 8px;
+  word-break: break-all;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
