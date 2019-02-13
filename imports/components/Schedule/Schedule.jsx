@@ -89,6 +89,14 @@ class Day extends React.Component {
 
     this.sessions = [
       {
+        title: "Introduction",
+        description: "An introduction to Vierde vrijdag. Plus 2 minute shoutouts - Anything to show, ask or share?",
+        startTime: 17.00,
+        lengthInMinutes: 15,
+        host: "Vierde vrijdag community",
+        space: "Main Space",
+      },
+      {
         title: "Practical tips for women in tech",
         description: "At Jongens van Techniek we value diversity. We aim at inspiring more women to take on the tech journey, and to do so we will provide our own experience and some practical tips.",
         startTime: 17.25,
