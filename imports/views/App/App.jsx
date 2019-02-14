@@ -5,6 +5,13 @@ import UpcomingSessions from '../UpcomingSessions/UpcomingSessions.jsx';
 import './App.css';
 
 class App extends React.Component {
+  componentDidMount() {
+    if (location.href.indexOf('localhost') <= -1 && location.protocol !== 'https:') {
+      location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+      return false;
+    }
+  }
+
   render() {
     return (
       <div className="App">
