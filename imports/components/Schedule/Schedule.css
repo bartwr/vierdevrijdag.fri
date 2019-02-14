@@ -57,6 +57,7 @@
 
 .ScheduleForSpace-session.active {
   background-color: #0fd9a3;
+  border-bottom: solid #eee 2px;
   white-space: normal;
   padding: 5px 5px;
   font-size: 12px;

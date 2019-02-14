@@ -49,11 +49,12 @@ class ScheduleForSpace extends React.Component {
   }
 
   render() {
-    let list = [];
+    let list = [], skipNumberOfSessionBlocks = 0;
     for (var i = this.startTime; i <= this.endTime; i = i + 0.25) {
       let session = this.getSessionForSpaceAndTime(this.props.name, i)
       if(session[0]) {
         session = session[0]
+        skipNumberOfSessionBlocks = session.lengthInMinutes / 15 - 1;
         list.push(
           <div key={'session-'+i} className="ScheduleForSpace-session active" data-hour={i} data-length={session.lengthInMinutes} style={{height: (session.lengthInMinutes / 15 * 7) + '%'}}>
             <span class="Session-title">{session.title}</span>
@@ -61,10 +62,14 @@ class ScheduleForSpace extends React.Component {
           </div>
         );
       } else {
-        list.push(
-          <div key={'session-'+i} className="ScheduleForSpace-session" data-hour={i}>
-          </div>
-        )
+        if(skipNumberOfSessionBlocks > 0) {
+          skipNumberOfSessionBlocks--;
+        } else {
+          list.push(
+            <div key={'session-'+i} className="ScheduleForSpace-session" data-hour={i}>
+            </div>
+          )
+        }
       }
     }
 
@@ -93,13 +98,29 @@ class Day extends React.Component {
         description: "An introduction to Vierde vrijdag. Plus 2 minute shoutouts - Anything to show, ask or share?",
         startTime: 17.00,
         lengthInMinutes: 15,
-        host: "Vierde vrijdag community",
+        host: "@all",
         space: "Main Space",
+      },
+      {
+        title: "Patenting Block Chain",
+        description: "This talk is a brief summary of the one-day conference on developments in the field of block chain innovations that was organised by the European Patent Office on 4 December 2018 and a synthesis of previously given 101 lectures on intellectual property.",
+        startTime: 17.25,
+        lengthInMinutes: 45,
+        host: "Sil Hu",
+        space: "Event Space",
+      },
+      {
+        title: "Linux in all flavours - Something for you?",
+        description: "Join this session to learn about Linux, the open source operating system. In just an half hour you'll see what devices use Linux, how Linux looks like on mobile phones, and what are the advantages of running Linux on your desktop/laptop.",
+        startTime: 17.25,
+        lengthInMinutes: 30,
+        host: "Bart Roorda",
+        space: "Lab Space",
       },
       {
         title: "Practical tips for women in tech",
         description: "At Jongens van Techniek we value diversity. We aim at inspiring more women to take on the tech journey, and to do so we will provide our own experience and some practical tips.",
-        startTime: 17.25,
+        startTime: 18,
         lengthInMinutes: 30,
         host: "Lucia Piseddu",
         space: "Event Space",
@@ -107,11 +128,19 @@ class Day extends React.Component {
       {
         title: "Distributed governance in blockchain & societal projects",
         description: "Blockchain & Distributed governance. Voting offchain & onchain.",
-        startTime: 18.00,
+        startTime: 18,
         lengthInMinutes: 45,
         host: "Rieke Smakman",
         space: "Lab Space",
-      }
+      },
+      {
+        title: "Drinks 🍷 & food 🍍",
+        description: "",
+        startTime: 19.00,
+        lengthInMinutes: 45,
+        host: "Lekker netwerken",
+        space: "Main Space",
+      },
     ]
 
     this.startTime = 17;
