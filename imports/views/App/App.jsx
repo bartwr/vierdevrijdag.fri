@@ -18,6 +18,9 @@ class App extends React.Component {
           </p>
         </div>
       	<UpcomingSessions />
+        <p align="center">
+          <small>This site is <a href="https://github.com/bartwr/vierdevrijdag.fri" target="_blank">open source</a> - feel free to contribute.</small><br /><br />
+        </p>
       </div>
     );
   }
