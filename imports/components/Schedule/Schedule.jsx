@@ -57,8 +57,8 @@ class ScheduleForSpace extends React.Component {
         skipNumberOfSessionBlocks = session.lengthInMinutes / 15 - 1;
         list.push(
           <div key={'session-'+i} className="ScheduleForSpace-session active" data-hour={i} data-length={session.lengthInMinutes} style={{height: (session.lengthInMinutes / 15 * 7) + '%'}}>
-            <span class="Session-title">{session.title}</span>
-            <span class="Session-host">{session.host}</span>
+            <span className="Session-title">{session.title}</span>
+            <span className="Session-host">{session.host}</span>
           </div>
         );
       } else {
@@ -107,31 +107,31 @@ class Day extends React.Component {
         startTime: 17.25,
         lengthInMinutes: 45,
         host: "Sil Hu",
-        space: "Event Space",
+        space: "Lab Space",
       },
       {
-        title: "Linux in all flavours - Something for you?",
+        title: "Linux - Why I like it, and why you could too",
         description: "Join this session to learn about Linux, the open source operating system. In just an half hour you'll see what devices use Linux, how Linux looks like on mobile phones, and what are the advantages of running Linux on your desktop/laptop.",
         startTime: 17.25,
         lengthInMinutes: 30,
         host: "Bart Roorda",
-        space: "Lab Space",
+        space: "Event Space",
       },
       {
         title: "Practical tips for women in tech",
         description: "At Jongens van Techniek we value diversity. We aim at inspiring more women to take on the tech journey, and to do so we will provide our own experience and some practical tips.",
-        startTime: 18,
+        startTime: 18.00,
         lengthInMinutes: 30,
         host: "Lucia Piseddu",
-        space: "Event Space",
+        space: "Lab Space",
       },
       {
-        title: "Distributed governance in blockchain & societal projects",
-        description: "Blockchain & Distributed governance. Voting offchain & onchain.",
+        title: "Governance, FTW (for the win)",
+        description: "Blockchain & Distributed governance: Talk & Panel discussion",
         startTime: 18,
-        lengthInMinutes: 45,
+        lengthInMinutes: 60,
         host: "Rieke Smakman",
-        space: "Lab Space",
+        space: "Event Space",
       },
       {
         title: "Drinks 🍷 & food 🍍",
