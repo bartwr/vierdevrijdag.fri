@@ -52,7 +52,7 @@
   height: calc(100% - 50px);
 }
 .ScheduleHours-timeslots > div {
-  height: 7%;
+  height: 5.8%;
 }
 
 .ScheduleForSpace-session.active {

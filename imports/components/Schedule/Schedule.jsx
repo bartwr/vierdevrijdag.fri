@@ -8,7 +8,7 @@ class ScheduleHours extends React.Component {
   constructor(props) {
     super(props);
 
-    this.startTime = 17;
+    this.startTime = 15;
     this.endTime   = 20;
   }
 
@@ -38,7 +38,7 @@ class ScheduleForSpace extends React.Component {
   constructor(props) {
     super(props);
 
-    this.startTime = 17;
+    this.startTime = 15;
     this.endTime   = 20;
   }
 
@@ -56,7 +56,7 @@ class ScheduleForSpace extends React.Component {
         session = session[0]
         skipNumberOfSessionBlocks = session.lengthInMinutes / 15 - 1;
         list.push(
-          <div key={'session-'+i} className="ScheduleForSpace-session active" data-hour={i} data-length={session.lengthInMinutes} style={{height: (session.lengthInMinutes / 15 * 7) + '%'}}>
+          <div key={'session-'+i} className="ScheduleForSpace-session active" data-hour={i} data-length={session.lengthInMinutes} style={{height: (session.lengthInMinutes / 15 * 5.8) + '%'}}>
             <span className="Session-title">{session.title}</span>
             <span className="Session-host">{session.host}</span>
           </div>
@@ -94,11 +94,19 @@ class Day extends React.Component {
 
     this.sessions = [
       {
+        title: "Blockchain Monthly Update - What happened in Blockchain this month?",
+        description: "An introduction to Vierde vrijdag. Plus 2 minute shoutouts - Anything to show, ask or share?",
+        startTime: 15.00,
+        lengthInMinutes: 45,
+        host: "For and by everyone who's interested",
+        space: "Lab Space",
+      },
+      {
         title: "Introduction",
         description: "An introduction to Vierde vrijdag. Plus 2 minute shoutouts - Anything to show, ask or share?",
         startTime: 17.00,
         lengthInMinutes: 15,
-        host: "@all",
+        host: "",
         space: "Main Space",
       },
       {
@@ -143,7 +151,7 @@ class Day extends React.Component {
       },
     ]
 
-    this.startTime = 17;
+    this.startTime = 15;
     this.endTime   = 20;
   }
 
