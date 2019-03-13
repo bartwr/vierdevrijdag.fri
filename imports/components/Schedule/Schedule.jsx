@@ -2,6 +2,8 @@ import React from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import * as R from 'ramda';
 
+import Events from '../../api/events';
+
 import './Schedule.css';
 
 class ScheduleHours extends React.Component {
@@ -177,5 +179,7 @@ class Schedule extends React.Component {
 }
 
 export default ScheduleContainer = withTracker(() => {
-  return {}
+  return {
+    events: Events.find().fetch(),
+  }
 })(Schedule);
