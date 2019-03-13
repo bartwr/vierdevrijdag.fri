@@ -30,10 +30,6 @@ class NewSession extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    console.log('target', target)
-    console.log('value', value)
-    console.log('name', name)
-
     this.setState({
       [name]: value
     });
@@ -72,9 +68,19 @@ class NewSession extends Component {
     const startMinutes = startTime.substr(3, 2) / 60 * 100;
     const endMinutes = endTime.substr(3, 2) / 60 * 100;
 
-    let startTimes = []
+    let startTimes = [], timeArray;
     for(let t = parseFloat(startHour + '.' + startMinutes); t <= parseFloat(endHour + '.' + endMinutes); t += 0.25) {
-      startTimes.push(t);
+      timeArray = String(t).split('.');
+      startTimes.push(
+        timeArray[0]
+        + ':'
+        + (timeArray[1] && timeArray[1] > 0
+            ? (timeArray[1] / 100 * 60) + (
+                (timeArray[1] / 100 * 60) == 3 ? '0' : ''
+              )
+            : '00'
+          )
+      );
     }
 
     return startTimes;
