@@ -1,10 +1,11 @@
 import { Meteor } from 'meteor/meteor';
-import Events from '/imports/api/events.js';
 import './api.js';
 
-function insertLink(title, url) {
-  // Links.insert({ title, url, createdAt: new Date() });
-}
+// Import server methods
+require('/imports/server/methods/events.js')
+
+// Publish data we need
+require('/imports/server/publish.js')()
 
 Meteor.startup(() => {
   

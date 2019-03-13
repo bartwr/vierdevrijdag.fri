@@ -1,10 +1,11 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { mount } from 'react-mounter';
-// import { render } from 'react-dom';
 
 import App from '../imports/views/App/App.jsx'
 import UpcomingSessions from '../imports/views/UpcomingSessions/UpcomingSessions.jsx';
+import NewEvent from '../imports/views/NewEvent/NewEvent.jsx';
+import Event from '../imports/views/Event/Event.jsx';
 
 Router.route('/', function () {
   mount(App, {
@@ -12,9 +13,15 @@ Router.route('/', function () {
   });
 });
 
-Router.route('/test', function () {
+Router.route('/events/new', function () {
   mount(App, {
-    content: <UpcomingSessions />
+    content: <NewEvent />
+  });
+});
+
+Router.route('/events/:eventId', function () {
+  mount(App, {
+    content: <Event eventId={this.params.eventId} />
   });
 });
 

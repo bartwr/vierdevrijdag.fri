@@ -1,0 +1,17 @@
+.NewEvent {
+  padding: 5px 15px;
+}
+
+.NewEvent label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.NewEvent input {
+  display: block;
+  width: 400px;
+  max-width: 100%;
+  line-height: 30px;
+  padding: 0 10px;
+}
