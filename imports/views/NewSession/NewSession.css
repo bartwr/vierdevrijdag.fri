@@ -1,0 +1,21 @@
+.NewSession {
+  padding: 5px 15px;
+}
+
+.NewSession label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.NewSession input,
+.NewSession select,
+.NewSession textarea {
+  font-family: sans-serif;
+  font-size:16px;
+  display: block;
+  width: 400px;
+  max-width: 100%;
+  line-height: 30px;
+  padding: 0 10px;
+}
