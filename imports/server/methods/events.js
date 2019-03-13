@@ -12,7 +12,7 @@ Meteor.methods({
       title: obj.title,
       url: obj.url,
       datetime_start: datetime_start,
-      datetime_end: obj.datetime_end
+      datetime_end: datetime_end
     });
   }
 })

@@ -3,20 +3,18 @@ import { withTracker } from 'meteor/react-meteor-data';
 import * as R from 'ramda';
 
 import Events from '../../api/events';
+import Sessions from '../../api/sessions';
 
 import './Schedule.css';
 
 class ScheduleHours extends React.Component {
   constructor(props) {
     super(props);
-
-    this.startTime = 15;
-    this.endTime   = 20;
   }
 
   render() {
     let list = [];
-    for (var i = this.startTime; i <= this.endTime; i = i + 0.25) {
+    for (var i = this.props.startTime; i <= this.props.endTime; i = i + 0.25) {
       list.push(
         <div key={'hour-'+i} className="ScheduleHours-hour" data-hour={i}>
           {i % 1 === 0 ? i : ''}
@@ -39,9 +37,6 @@ class ScheduleHours extends React.Component {
 class ScheduleForSpace extends React.Component {
   constructor(props) {
     super(props);
-
-    this.startTime = 15;
-    this.endTime   = 20;
   }
 
   getSessionForSpaceAndTime(space, time) {
@@ -52,7 +47,7 @@ class ScheduleForSpace extends React.Component {
 
   render() {
     let list = [], skipNumberOfSessionBlocks = 0;
-    for (var i = this.startTime; i <= this.endTime; i = i + 0.25) {
+    for (var i = this.props.startTime; i <= this.props.endTime; i = i + 0.25) {
       let session = this.getSessionForSpaceAndTime(this.props.name, i)
       if(session[0]) {
         session = session[0]
@@ -93,76 +88,31 @@ class Day extends React.Component {
     super(props);
 
     this.spaces = ['Event Space', 'Lab Space', 'Main Space'];
-
-    this.sessions = [
-      {
-        title: "Blockchain Monthly Update - What happened in Blockchain this month?",
-        description: "An introduction to Vierde vrijdag. Plus 2 minute shoutouts - Anything to show, ask or share?",
-        startTime: 15.00,
-        lengthInMinutes: 45,
-        host: "For and by everyone who's interested",
-        space: "Lab Space",
-      },
-      {
-        title: "Introduction",
-        description: "An introduction to Vierde vrijdag. Plus 2 minute shoutouts - Anything to show, ask or share?",
-        startTime: 17.00,
-        lengthInMinutes: 15,
-        host: "",
-        space: "Main Space",
-      },
-      {
-        title: "Patenting Block Chain",
-        description: "This talk is a brief summary of the one-day conference on developments in the field of block chain innovations that was organised by the European Patent Office on 4 December 2018 and a synthesis of previously given 101 lectures on intellectual property.",
-        startTime: 17.25,
-        lengthInMinutes: 45,
-        host: "Sil Hu",
-        space: "Lab Space",
-      },
-      {
-        title: "Linux - Why I like it, and why you could too",
-        description: "Join this session to learn about Linux, the open source operating system. In just an half hour you'll see what devices use Linux, how Linux looks like on mobile phones, and what are the advantages of running Linux on your desktop/laptop.",
-        startTime: 17.25,
-        lengthInMinutes: 30,
-        host: "Bart Roorda",
-        space: "Event Space",
-      },
-      {
-        title: "Practical tips for women in tech",
-        description: "At Jongens van Techniek we value diversity. We aim at inspiring more women to take on the tech journey, and to do so we will provide our own experience and some practical tips.",
-        startTime: 18.00,
-        lengthInMinutes: 30,
-        host: "Lucia Piseddu",
-        space: "Lab Space",
-      },
-      {
-        title: "Governance, FTW (for the win)",
-        description: "Blockchain & Distributed governance: Talk & Panel discussion",
-        startTime: 18,
-        lengthInMinutes: 60,
-        host: "Rieke Smakman",
-        space: "Event Space",
-      },
-      {
-        title: "Drinks 🍷 & food 🍍",
-        description: "",
-        startTime: 19.00,
-        lengthInMinutes: 45,
-        host: "Lekker netwerken",
-        space: "Main Space",
-      },
-    ]
-
-    this.startTime = 15;
-    this.endTime   = 20;
   }
 
   render() {
+    if(! this.props || ! this.props.event) return (<div>loading event day..</div>);
+
+    // Extract time from datetime objects
+    const startTime = this.props.event.datetime_start.substr(this.props.event.datetime_start.length - 5);
+    const endTime = this.props.event.datetime_end.substr(this.props.event.datetime_end.length - 5);
+
+    // Get only the hour
+    const startHour = startTime.substr(0, 2);
+    const endHour = endTime.substr(0, 2);
+
+    // Get the minutes as a decimal number (15 minutes = 0.25)
+    const startMinutes = startTime.substr(3, 2) / 60 * 100;
+    const endMinutes = endTime.substr(3, 2) / 60 * 100;
+
+    const startTimeFormatted = parseFloat(startHour + '.' + startMinutes);
+    const endTimeFormatted = parseFloat(endHour + '.' + endMinutes);
+
     return (
       <div className="Day">
-        <ScheduleHours />
+        <ScheduleHours startTime={startTimeFormatted} endTime={endTimeFormatted} event={this.props.event} sessions={this.props.sessions} />
         {R.map((name) =>
-          <ScheduleForSpace key={name} name={name} sessions={this.sessions} />
+          <ScheduleForSpace startTime={startTimeFormatted} endTime={endTimeFormatted} key={name} name={name} sessions={this.props.sessions} />
         , this.spaces)}
       </div>
     );
@@ -170,16 +120,25 @@ class Day extends React.Component {
 }
 class Schedule extends React.Component {
   render() {
+    if(! this.props.sessions) {
+      return (
+        <div>loading event..</div>
+      )
+    }
     return (
       <div className="Schedule">
-        <Day />
+        <Day event={this.props.event} sessions={this.props.sessions} />
       </div>
     );
   }
 }
 
-export default ScheduleContainer = withTracker(() => {
+export default ScheduleContainer = withTracker((props) => {
+  Meteor.subscribe('event', props.eventId)
+  Meteor.subscribe('sessions', props.eventId)
+
   return {
-    events: Events.find().fetch(),
+    event: Events.findOne(props.eventId),
+    sessions: Sessions.find({ eventId: props.eventId }).fetch()
   }
 })(Schedule);

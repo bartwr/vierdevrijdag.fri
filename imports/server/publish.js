@@ -8,8 +8,8 @@ module.exports = function() {
   Meteor.publish('event', function(eventId){
     return Events.find({ _id: eventId })
   })
-  Meteor.publish('sessions', function(){
-    return Sessions.find()
+  Meteor.publish('sessions', function(eventId){
+    return Sessions.find({ eventId: eventId })
   })
   Meteor.publish('session', function(sessionId){
     return Sessions.find({ _id: sessionId })

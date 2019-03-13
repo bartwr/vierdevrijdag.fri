@@ -14,7 +14,7 @@ class Event extends Component {
     super(props)
 
     this.state = {
-      isFormVisible: true
+      isFormVisible: false
     }
   }
 
