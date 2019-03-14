@@ -9,7 +9,7 @@ import Event from '../imports/views/Event/Event.jsx';
 
 Router.route('/', function () {
   mount(App, {
-    content: <UpcomingSessions />
+    content: <Event />
   });
 });
 
