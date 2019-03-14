@@ -50,7 +50,7 @@ class NewEvent extends Component {
       <form method="post" onSubmit={this.handleSubmit.bind(this)} className="NewEvent">
         <label>
           Title of event
-          <input type="text" name="title" placeholder="Title of event" value={this.state.title} onChange={this.handleInputChange} />
+          <input type="text" name="title" required placeholder="Title of event" value={this.state.title} onChange={this.handleInputChange} />
         </label>
         <label>
           Meetup URL

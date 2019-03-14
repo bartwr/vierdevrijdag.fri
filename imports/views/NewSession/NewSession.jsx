@@ -48,6 +48,7 @@ class NewSession extends Component {
     }
     else {
       console.info('Session succesfully added!');
+      alert('Nice! You\'ll receive an email with additional info in the near future.')
       document.location = '/events/'+this.state.eventId
     }
   }
@@ -71,16 +72,18 @@ class NewSession extends Component {
     let startTimes = [], timeArray;
     for(let t = parseFloat(startHour + '.' + startMinutes); t <= parseFloat(endHour + '.' + endMinutes); t += 0.25) {
       timeArray = String(t).split('.');
-      startTimes.push(
-        timeArray[0]
-        + ':'
-        + (timeArray[1] && timeArray[1] > 0
-            ? (timeArray[1] / 100 * 60) + (
-                (timeArray[1] / 100 * 60) == 3 ? '0' : ''
-              )
-            : '00'
-          )
-      );
+      startTimes.push({
+        decimal: t,
+        hourly: 
+          timeArray[0]
+          + ':'
+          + (timeArray[1] && timeArray[1] > 0
+              ? (timeArray[1] / 100 * 60) + (
+                  (timeArray[1] / 100 * 60) == 3 ? '0' : ''
+                )
+              : '00'
+            )
+      });
     }
 
     return startTimes;
@@ -90,9 +93,21 @@ class NewSession extends Component {
     this.populateStartTimes();
     return (
       <form method="post" onSubmit={this.handleSubmit.bind(this)} className="NewSession">
-        <label>
+        <hr />
+        <div style={{backgroundColor: '#eee', padding: '10px', marginBottom: '50px'}}>
+        <p>
+          Nice that you want to host a session! Vierde vrijdag is really about sharing knowledge and experience. No pitches, but sharing about setting up a business, your learnings, your hobby, a project you're working on, an interest of you. Everything related to business and tech.
+        </p>
+        <p>
+          We'll help you hosting your session. You'll have a beamer and such, and promote it with you. Towards the event we'll send some emails with best practices, so you'll be fully prepared.
+        </p>
+        <p>
+          <b><i>So, What's your session about?</i></b>
+        </p>
+        </div>
+        <label style={{color: '#0fd9a3'}}>
           Title of your session
-          <input type="text" name="title" placeholder="Title of your session" value={this.state.title} onChange={this.handleInputChange} />
+          <input type="text" name="title" required placeholder="Title of your session" value={this.state.title} onChange={this.handleInputChange} />
         </label>
         <label>
           Short description (+- 4 sentences max.)
@@ -101,7 +116,7 @@ class NewSession extends Component {
         <label>
           Start time
           <select name="startTime" onChange={this.handleInputChange}>
-            {R.map((time) => <option key={time} value={time}>{time}</option>, this.populateStartTimes())}
+            {R.map((time) => <option key={time.decimal} value={time.decimal}>{time.hourly}</option>, this.populateStartTimes())}
           </select>
         </label>
         <label>
@@ -111,6 +126,7 @@ class NewSession extends Component {
         <label>
           Prefered space
           <select name="space" onChange={this.handleInputChange}>
+            <option value="-">--Select a space--</option>
             <option value="Event Space">Event Space</option>
             <option value="Lab Space">Lab Space</option>
             <option value="Main Space">Main Space</option>
@@ -118,11 +134,11 @@ class NewSession extends Component {
         </label>
         <label>
           Name of host (in example: your name)
-          <input type="text" name="host" value={this.state.host} onChange={this.handleInputChange}  />
+          <input type="text" name="host" required value={this.state.host} onChange={this.handleInputChange}  />
         </label>
         <label>
           Email address of the host
-          <input type="email" name="hostEmail" value={this.state.hostEmail} onChange={this.handleInputChange}  />
+          <input type="email" name="hostEmail" required value={this.state.hostEmail} onChange={this.handleInputChange}  />
         </label>
         <label>
           <button type="submit">Save</button>
