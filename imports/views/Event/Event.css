@@ -1,2 +1,7 @@
 .Event {
 }
+
+.Event .button {
+  background-color: #0fd9a3;
+  font-weight: bold;
+}
