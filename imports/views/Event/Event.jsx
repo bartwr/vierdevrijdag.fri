@@ -40,11 +40,11 @@ class Event extends Component {
             </a>
           </p>
           <div hidden={! this.state.isFormVisible && this.props.NewSession !== true}>
-            <NewSession eventId={this.props.eventId || '5c9668335e9c51e658c38712'} />
+            <NewSession eventId={this.props.eventId || 'w9a9arekbuwfzdjLK'} />
           </div>
         </div>
         <NextMeetup />
-        <Schedule eventId={this.props.eventId || '5c9668335e9c51e658c38712'} />
+        <Schedule eventId={this.props.eventId || 'w9a9arekbuwfzdjLK'} />
       </div>
     );
   }
