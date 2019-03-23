@@ -127,9 +127,10 @@ class NewSession extends Component {
           Prefered space
           <select name="space" onChange={this.handleInputChange}>
             <option value="-">--Select a space--</option>
-            <option value="Event Space">Event Space</option>
-            <option value="Lab Space">Lab Space</option>
-            <option value="Main Space">Main Space</option>
+            <option value="Main Space">Main Space (introduction, drinks & dinner)</option>
+            <option value="Event Space">Event Space (max 40 ppl)</option>
+            <option value="Lab Space">Lab Space (max 15 ppl)</option>
+            <option value="Elevator Space">Elevator Space (max. 20 ppl)</option>
           </select>
         </label>
         <label>

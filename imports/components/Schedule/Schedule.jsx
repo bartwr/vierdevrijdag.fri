@@ -87,7 +87,7 @@ class Day extends React.Component {
   constructor(props) {
     super(props);
 
-    this.spaces = ['Event Space', 'Lab Space', 'Main Space'];
+    this.spaces = ['Main Space', 'Event Space', 'Lab Space', 'Elevator Space'];
   }
 
   render() {
