@@ -13,6 +13,12 @@ Router.route('/', function () {
   });
 });
 
+Router.route('/sessions/new', function () {
+  mount(App, {
+    content: <Event NewSession={true} />
+  });
+});
+
 Router.route('/events/new', function () {
   mount(App, {
     content: <NewEvent />
