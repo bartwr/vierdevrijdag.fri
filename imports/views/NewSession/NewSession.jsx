@@ -99,7 +99,7 @@ class NewSession extends Component {
           Nice that you want to host a session! Vierde vrijdag is really about sharing knowledge and experience. No pitches, but sharing about setting up a business, your learnings, your hobby, a project you're working on, an interest of you. Everything related to business and tech.
         </p>
         <p>
-          We'll help you hosting your session. You'll have a beamer and such, and promote it with you. Towards the event we'll send some emails with best practices, so you'll be fully prepared.
+          We'll help you hosting your session. You'll have a beamer and such, and we'll promote the session with you. Towards the event we'll send some emails with best practices, so you'll be fully prepared.
         </p>
         <p>
           <b><i>So, What's your session about?</i></b>
