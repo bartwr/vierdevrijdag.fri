@@ -43,7 +43,7 @@ class Event extends Component {
             <NewSession eventId={this.props.eventId || 'w9a9arekbuwfzdjLK'} />
           </div>
         </div>
-        <NextMeetup />
+        <NextMeetup eventId={this.props.eventId || 'w9a9arekbuwfzdjLK'} />
         <Schedule eventId={this.props.eventId || 'w9a9arekbuwfzdjLK'} />
       </div>
     );
