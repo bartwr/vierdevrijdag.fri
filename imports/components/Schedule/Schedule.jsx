@@ -5,6 +5,9 @@ import * as R from 'ramda';
 import Events from '../../api/events';
 import Sessions from '../../api/sessions';
 
+// Import components
+import SessionDetails from '../SessionDetails/SessionDetails.jsx';
+
 import './Schedule.css';
 
 class ScheduleHours extends React.Component {
@@ -53,7 +56,14 @@ class ScheduleForSpace extends React.Component {
         session = session[0]
         skipNumberOfSessionBlocks = session.lengthInMinutes / 15 - 1;
         list.push(
-          <div key={'session-'+i} className="ScheduleForSpace-session active" data-hour={i} data-length={session.lengthInMinutes} style={{height: (session.lengthInMinutes / 15 * 5.8) + '%'}}>
+          <div
+            key={'session-'+i}
+            className="ScheduleForSpace-session active"
+            data-hour={i}
+            data-length={session.lengthInMinutes}
+            style={{height: (session.lengthInMinutes / 15 * 5.8) + '%'}}
+            onClick={() => this.props.showSessionDetails(session)}
+            >
             <span className="Session-title">{session.title}</span>
             <span className="Session-host">{session.host}</span>
           </div>
@@ -87,7 +97,7 @@ class Day extends React.Component {
   constructor(props) {
     super(props);
 
-    this.spaces = ['Main Space', 'Event Space', 'Lab Space', 'Elevator Space'];
+    this.spaces = ['Main Space', 'Event Space', 'Lab Space'];
   }
 
   render() {
@@ -112,13 +122,36 @@ class Day extends React.Component {
       <div className="Day">
         <ScheduleHours startTime={startTimeFormatted} endTime={endTimeFormatted} event={this.props.event} sessions={this.props.sessions} />
         {R.map((name) =>
-          <ScheduleForSpace startTime={startTimeFormatted} endTime={endTimeFormatted} key={name} name={name} sessions={this.props.sessions} />
+          <ScheduleForSpace
+            key={name}
+            name={name}
+            startTime={startTimeFormatted}
+            endTime={endTimeFormatted}
+            sessions={this.props.sessions}
+            showSessionDetails={this.props.showSessionDetails}
+            />
         , this.spaces)}
       </div>
     );
   }
 }
 class Schedule extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showSessionDetails: false,
+      activeSession: {}
+    }
+  }
+
+  showSessionDetails(session) {
+    this.setState({
+      showSessionDetails: true,
+      activeSession: session
+    })
+  }
+
   render() {
     if(! this.props.sessions) {
       return (
@@ -127,7 +160,16 @@ class Schedule extends React.Component {
     }
     return (
       <div className="Schedule">
-        <Day event={this.props.event} sessions={this.props.sessions} />
+        <Day
+          event={this.props.event}
+          sessions={this.props.sessions}
+          showSessionDetails={this.showSessionDetails.bind(this)}
+          />
+        {this.state.showSessionDetails
+          && <SessionDetails
+              session={this.state.activeSession}
+              close={() => this.setState({ showSessionDetails: false })}
+              />}
       </div>
     );
   }
