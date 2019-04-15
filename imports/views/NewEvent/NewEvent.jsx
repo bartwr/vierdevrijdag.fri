@@ -8,8 +8,10 @@ class NewEvent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      _id: props.eventId,
       title: '',
       url: '',
+      location: '',
       date_start: '',
       time_start: '',
       date_end: '',
@@ -31,7 +33,13 @@ class NewEvent extends Component {
   handleSubmit(e) {
     e.preventDefault()
 
-    Meteor.call('events.new', this.state, this.handleEventAdded.bind(this))
+    // Edit
+    if(this.state._id) {
+      Meteor.call('events.edit', this.state, this.handleEventAdded.bind(this))
+    // Or Add
+    } else {
+      Meteor.call('events.new', this.state, this.handleEventAdded.bind(this))
+    }
   }
 
   handleEventAdded(err, eventId) {
@@ -40,12 +48,40 @@ class NewEvent extends Component {
       return;
     }
     else {
-      console.info('Event succesfully added!');
+      // Event succesfully added/modified!';
+      alert('Saved!');
       document.location = '/events/'+eventId
     }
   }
 
+  componentWillReceiveProps(props) {
+
+    // Convert datetime
+    let startDate, startTime, endDate, endTime;
+    if(props.event.datetime_start) {
+      startDate = props.event.datetime_start.substr(0, 10);
+      startTime = props.event.datetime_start.substr(props.event.datetime_start.length - 5);
+    }
+    if(props.event.datetime_end) {
+      endDate = props.event.datetime_end.substr(0, 10);
+      endTime = props.event.datetime_end.substr(props.event.datetime_end.length - 5);
+    }
+
+    // Set state
+    this.setState({
+      _id: props.event._id,
+      title: props.event.title,
+      url: props.event.url,
+      location: props.event.location,
+      date_start: startDate,
+      time_start: startTime,
+      date_end: endDate,
+      time_end: endTime
+    })
+  }
+
   render() {
+    // Extract time from datetime objects
     return (
       <form method="post" onSubmit={this.handleSubmit.bind(this)} className="NewEvent">
         <label>
@@ -55,6 +91,10 @@ class NewEvent extends Component {
         <label>
           Meetup URL
           <input type="text" name="url" placeholder="Meetup URL" value={this.state.url} onChange={this.handleInputChange}  />
+        </label>
+        <label>
+          Location
+          <input type="text" name="location" placeholder="Meetup location" value={this.state.location} onChange={this.handleInputChange}  />
         </label>
         <label>
           Start date & time
@@ -74,4 +114,10 @@ class NewEvent extends Component {
   }
 }
 
-export default NewEvent;
+export default withTracker((props) => {
+  Meteor.subscribe('event', props.eventId);
+
+  return {
+    event: Events.findOne(props.eventId)
+  }
+})(NewEvent);

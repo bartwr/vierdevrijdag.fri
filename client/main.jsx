@@ -25,6 +25,12 @@ Router.route('/events/new', function () {
   });
 });
 
+Router.route('/events/edit/:eventId', function () {
+  mount(App, {
+    content: <NewEvent eventId={this.params.eventId} />
+  });
+});
+
 Router.route('/events/:eventId', function () {
   mount(App, {
     content: <Event eventId={this.params.eventId} />
