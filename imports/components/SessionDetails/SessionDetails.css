@@ -28,6 +28,8 @@
   max-width: 520px;
   background-color: #fff;
   padding: 15px;
+  margin: 0 auto;
+  cursor: auto;
 }
 
 .SessionDetails-title {
