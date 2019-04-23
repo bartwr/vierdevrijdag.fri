@@ -55,7 +55,7 @@
   height: 5.8%;
 }
 
-.ScheduleForSpace-session {
+.ScheduleForSpace-session.active {
   cursor: pointer;
   background-color: #0fd9a3;
   border-bottom: solid #eee 2px;
@@ -63,7 +63,7 @@
   padding: 5px 5px;
   font-size: 12px;
 }
-.ScheduleForSpace-session:hover {
+.ScheduleForSpace-session.active:hover {
   background-color: #ff0;
 }
 

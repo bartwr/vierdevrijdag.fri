@@ -31,7 +31,7 @@ class SessionDetails extends React.Component {
             {this.props.session.title}
           </div>
           <div className="SessionDetails-meta">
-            Host: {this.props.session.host}<br />
+            <div hidden={! this.props.session.host}>Host: {this.props.session.host}</div>
             Space: {this.props.session.space}<br />
             Start time: {startHour}:{startMinutes.toFixed(0)}<br />
             Length: {this.props.session.lengthInMinutes} minutes
