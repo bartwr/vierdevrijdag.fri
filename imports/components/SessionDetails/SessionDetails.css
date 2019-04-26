@@ -13,7 +13,7 @@
   background-color: rgba(0,0,0,0.6);
   overflow-x: hidden;
   overflow-y: scroll;
-  cursor: pointer;
+  cursor: zoom-out;
   z-index: 10;
   -webkit-text-size-adjust: none;
   -webkit-overflow-scrolling: touch;
