@@ -16,7 +16,7 @@ class SessionDetails extends React.Component {
   render() {
     const startTime = this.props.session.startTime;
     const startHour = startTime.substr(0, 2);
-    const startMinutes = startTime.substr(3, 2) / 60 * 100;
+    const startMinutes = startTime.substr(3, 2) / 100 * 60;
     return (
       <div className="SessionDetails" onClick={this.clickOverlay.bind(this)}>
         <div className="SessionDetails-inner">
@@ -31,7 +31,7 @@ class SessionDetails extends React.Component {
             {this.props.session.title}
           </div>
           <div className="SessionDetails-meta">
-            <div hidden={! this.props.session.host}>Host: {this.props.session.host}</div>
+            <div hidden={this.props.session.host.length <= 0}>Host: {this.props.session.host}</div>
             Space: {this.props.session.space}<br />
             Start time: {startHour}:{startMinutes.toFixed(0)}<br />
             Length: {this.props.session.lengthInMinutes} minutes
