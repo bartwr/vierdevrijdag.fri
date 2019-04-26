@@ -1,0 +1,10 @@
+.PaymentButton button {
+  margin: 15px 0;
+  background: #f00;
+  color: #fff;
+  border-bottom: solid #eee 2px;
+  padding: 8px 10px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+}

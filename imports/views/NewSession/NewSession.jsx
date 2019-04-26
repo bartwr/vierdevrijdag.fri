@@ -42,6 +42,7 @@ class NewSession extends Component {
   }
 
   handleSessionAdded(err, sessionId) {
+    var self = this;
     if(err) {
       console.error(err);
       return;
@@ -49,7 +50,10 @@ class NewSession extends Component {
     else {
       console.info('Session succesfully added!');
       alert('Nice! You\'ll receive an email with additional info in the near future.')
-      document.location = '/events/'+this.state.eventId
+      // Now send email.
+      Meteor.call('sessions.newSessionEmail', this.state, function() {
+        document.location = '/events/'+self.state.eventId;
+      });
     }
   }
 
@@ -130,7 +134,7 @@ class NewSession extends Component {
             <option value="Main Space">Main Space (introduction, drinks & dinner)</option>
             <option value="Event Space">Event Space (max 40 ppl)</option>
             <option value="Lab Space">Lab Space (max 15 ppl)</option>
-            <option value="Elevator Space">Elevator Space (max. 20 ppl)</option>
+            {/*<option value="Discuss Space">Discuss Space (max. 20 ppl)</option>*/}
           </select>
         </label>
         <label>

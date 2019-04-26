@@ -4,8 +4,10 @@ import { mount } from 'react-mounter';
 
 import App from '../imports/views/App/App.jsx'
 import UpcomingSessions from '../imports/views/UpcomingSessions/UpcomingSessions.jsx';
+import Dinner from '../imports/views/Dinner/Dinner.jsx';
 import NewEvent from '../imports/views/NewEvent/NewEvent.jsx';
 import Event from '../imports/views/Event/Event.jsx';
+import Webhook from '../imports/views/Webhook/Webhook.jsx';
 
 Router.route('/', function () {
   mount(App, {
@@ -16,6 +18,18 @@ Router.route('/', function () {
 Router.route('/sessions/new', function () {
   mount(App, {
     content: <Event NewSession={true} />
+  });
+});
+
+Router.route('/dinner', function () {
+  mount(App, {
+    content: <Dinner />
+  });
+});
+
+Router.route('/webhook', function () {
+  mount(App, {
+    content: <Webhook />
   });
 });
 

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PaymentButton from '../PaymentButton/PaymentButton.jsx';
+
 import './SessionDetails.css';
 
 class SessionDetails extends React.Component {
@@ -39,6 +41,7 @@ class SessionDetails extends React.Component {
           <div className="SessionDetails-description">
             {this.props.session.description}
           </div>
+          {this.props.session._id == 'gZ4tpjqnhCa3ZMgs9' ? <PaymentButton /> : ''}
         </div>
       </div>
     )

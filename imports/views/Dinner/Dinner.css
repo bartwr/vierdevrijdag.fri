@@ -1,0 +1,12 @@
+.Dinner {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.Dinner p {
+  font-size: 20px;
+}
+.Dinner b {
+  font-weight: bold;
+  color: #f00;
+  margin-left: 5px;
+}
