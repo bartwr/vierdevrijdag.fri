@@ -5,6 +5,9 @@ module.exports = function() {
   Meteor.publish('events', function(){
     return Events.find()
   })
+  Meteor.publish('lastEvent', function(){
+    return Events.find({}, { sort: {datetime_start: -1}, limit: 1 })
+  })
   Meteor.publish('event', function(eventId){
     return Events.find({ _id: eventId })
   })

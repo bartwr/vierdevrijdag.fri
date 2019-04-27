@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import * as R from 'ramda';
 
+// Import models
+import Events from '../../api/events';
+
+// Import components
 import UpcomingSessions from '../UpcomingSessions/UpcomingSessions.jsx';
 import NextMeetup from '../NextMeetup/NextMeetup.jsx';
 import NewSession from '../NewSession/NewSession.jsx';
@@ -27,6 +31,12 @@ class Event extends Component {
   }
 
   render() {
+    // Get eventId
+    const eventId = this.props.eventId
+                    || (this.props.events[0] && this.props.events[0]._id
+                        ? this.props.events[0]._id : false);
+    // If no eventId is there, show 'Loading'
+    if(! eventId) return <div>Loading</div>
     return (
       <div className="Event">
         <div className="Text">
@@ -40,14 +50,21 @@ class Event extends Component {
             </a>
           </p>
           <div hidden={! this.state.isFormVisible && this.props.NewSession !== true}>
-            <NewSession eventId={this.props.eventId || 'w9a9arekbuwfzdjLK'} />
+            <NewSession eventId={eventId} />
           </div>
         </div>
-        <NextMeetup eventId={this.props.eventId || 'w9a9arekbuwfzdjLK'} />
-        <Schedule eventId={this.props.eventId || 'w9a9arekbuwfzdjLK'} />
+        <NextMeetup eventId={eventId} />
+        <Schedule eventId={eventId} />
       </div>
     );
   }
 }
 
-export default Event;
+export default EventContainer = withTracker((props) => {
+  Meteor.subscribe('lastEvent');
+
+  return {
+    eventId: props.eventId,
+    events: Events.find({}).fetch()
+  }
+})(Event);

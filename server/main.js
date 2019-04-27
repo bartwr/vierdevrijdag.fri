@@ -10,5 +10,4 @@ require('/imports/server/methods/sessions.js')
 require('/imports/server/publish.js')()
 
 Meteor.startup(() => {
-  
 });
