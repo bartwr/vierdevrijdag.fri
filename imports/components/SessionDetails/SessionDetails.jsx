@@ -41,7 +41,7 @@ class SessionDetails extends React.Component {
           <div className="SessionDetails-description">
             {this.props.session.description}
           </div>
-          {this.props.session._id == 'gZ4tpjqnhCa3ZMgs9' ? <PaymentButton /> : ''}
+          {this.props.session.host == 'Esther Van Leeuwe' ? <PaymentButton /> : ''}
         </div>
       </div>
     )
