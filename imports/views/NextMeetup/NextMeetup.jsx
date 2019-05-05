@@ -10,7 +10,7 @@ class NextMeetup extends Component {
 
   render() {
     return (
-      <a href="https://www.meetup.com/vierdevrijdag/events/jjtxlqyzgbjc/" target="_blank" className="NextMeetup">
+      <a href={this.props.event.url} target="_blank" className="NextMeetup">
         <div className="text--label">
           Your Meetup
         </div>
