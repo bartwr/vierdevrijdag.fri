@@ -12,7 +12,7 @@ class NextMeetup extends Component {
     return (
       <a href="https://www.meetup.com/vierdevrijdag/events/jjtxlqyzgbjc/" target="_blank" className="NextMeetup">
         <div className="text--label">
-          Your Next Meetup
+          Your Meetup
         </div>
         <h2 className="heroPrimary">
           {this.props.event && this.props.event.title}

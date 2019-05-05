@@ -30,11 +30,38 @@ class Event extends Component {
     });
   }
 
+  goToPreviousEvent(datetime_start) {
+    const previousEvent = Events.find(
+      { datetime_start: { $lt: datetime_start }}
+      , { sort: {datetime_start: -1}, limit: 1 }
+    ).fetch()
+
+    if(previousEvent[0]) {
+      Router.go('/events/' + previousEvent[0]._id);
+    } else {
+      alert('Amazing. You\'ve just witnessed the first event ever on this site. You can\'t go further back into history. Try to go forward.')
+    }
+  }
+
+  goToNextEvent(datetime_start) {
+    const nextEvent = Events.find(
+      { datetime_start: { $gt: datetime_start }}
+      , { sort: {datetime_start: 1}, limit: 1 }
+    ).fetch()
+
+    if(nextEvent[0]) {
+      Router.go('/events/' + nextEvent[0]._id);
+    } else {
+      prompt('You\'ve reached the latest event. Want to create the next event yourself? Go to vierdevrijdag.info/events/new', 'https://www.vierdevrijdag.info/events/new');
+    }
+  }
+
   render() {
     // Get eventId
     const eventId = this.props.eventId
-                    || (this.props.events[0] && this.props.events[0]._id
-                        ? this.props.events[0]._id : false);
+                    || (this.props.currentEvent[0] && this.props.currentEvent[0]._id
+                        ? this.props.currentEvent[0]._id : false);
+    const datetime_start = (this.props.currentEvent[0] ? this.props.currentEvent[0].datetime_start : null);
     // If no eventId is there, show 'Loading'
     if(! eventId) return <div>Loading</div>
     return (
@@ -55,16 +82,38 @@ class Event extends Component {
         </div>
         <NextMeetup eventId={eventId} />
         <Schedule eventId={eventId} />
+        <div className="Event-eventNavigation">
+          <a onClick={this.goToPreviousEvent.bind(this, datetime_start)} className="Event-eventNavigation-button previous">
+            &lt;
+          </a>
+          <a onClick={this.goToNextEvent.bind(this, datetime_start)} className="Event-eventNavigation-button next">
+            &gt;
+          </a>
+        </div>
       </div>
     );
   }
 }
 
 export default EventContainer = withTracker((props) => {
-  Meteor.subscribe('lastEvent');
+
+  // Get current event
+  if(props.eventId) {
+    Meteor.subscribe('event', props.eventId);
+  } else {
+    Meteor.subscribe('latestEvent');
+  }
+  const currentEvent = Events.find({}).fetch();
+
+  // Get next & previous event
+  if(currentEvent.length > 0) {
+    const datetime_start = currentEvent[0].datetime_start;
+    Meteor.subscribe('previousEvent', datetime_start);
+    Meteor.subscribe('nextEvent', datetime_start);
+  }
 
   return {
     eventId: props.eventId,
-    events: Events.find({}).fetch()
+    currentEvent: currentEvent
   }
 })(Event);
