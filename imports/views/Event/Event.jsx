@@ -39,7 +39,7 @@ class Event extends Component {
     if(previousEvent[0]) {
       Router.go('/events/' + previousEvent[0]._id);
     } else {
-      alert('Amazing. You\'ve just witnessed the first event ever on this site. You can\'t go further back into history. Try to go forward.')
+      alert('Amazing. You\'ve just witnessed the first event ever created on this site. You can\'t go further back into history. Try to go forward.')
     }
   }
 
@@ -52,7 +52,7 @@ class Event extends Component {
     if(nextEvent[0]) {
       Router.go('/events/' + nextEvent[0]._id);
     } else {
-      prompt('You\'ve reached the latest event. Want to create the next event yourself? Go to vierdevrijdag.info/events/new', 'https://www.vierdevrijdag.info/events/new');
+      prompt('You\'ve reached the latest event. Want to create the next event yourself? Go to:', 'https://www.vierdevrijdag.info/events/new');
     }
   }
 

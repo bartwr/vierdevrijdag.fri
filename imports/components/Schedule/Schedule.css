@@ -1,15 +1,14 @@
 .Schedule {
   max-width: calc(100% - 30px);
-  height: 90vh;
+  /*height: 90vh;*/
   position: relative;
   overflow: hidden;
   overflow-x: auto;
   margin: 15px 15px 25px 15px;
-  border: solid 5px #0fd9a3;
 }
 
 .Day {
-  height: 100%;
+  display: flex;
   white-space: nowrap;
   position: relative;
 }
@@ -18,20 +17,29 @@
 .ScheduleForSpace {
   display: inline-block;
   vertical-align: top;
-  height: 100%;
-  min-width: 25px;
+  min-width: 50px;
   background: #fff;
   border-right: solid #eee 2px;
 }
 .ScheduleHours {
-  height: 100%;
   text-align: center;
   position: sticky;
   left: 0;
 }
+.ScheduleHours-hour {
+  color: #989da8;
+  font-size: 12px;
+}
+.ScheduleHours-hour .time {
+  padding: 7px;
+}
+.ScheduleHours-hour.is-full-hour {
+  border-top: 1px dashed hsla(221,8%,63%,.3);
+}
 .ScheduleForSpace {
   width: 200px;
-  min-width: 32.2%;
+  flex: 1;
+  min-width: 170px;
 }
 .ScheduleForSpace:last-child {
   border-right: none;
@@ -47,27 +55,74 @@
   text-align: center;
   font-weight: bold;
   padding: 10px 0;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
 }
 
 .ScheduleHours-timeslots {
-  height: calc(100% - 50px);
+  /*height: calc(100% - 50px);*/
 }
 .ScheduleHours-timeslots > div {
-  height: 5.8%;
+  height: 20px;
 }
 
+.ScheduleForSpace-session.is-full-hour {
+  border-top: 1px dashed hsla(221,8%,63%,.3);
+}
 .ScheduleForSpace-session.active {
   cursor: pointer;
   background-color: #0fd9a3;
   border-bottom: solid #eee 2px;
   white-space: normal;
   padding: 5px 5px;
-  font-size: 12px;
+  font-size: 16px;
+  text-shadow: 0px 0px 5px #3e3e3e;
+  position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
 }
 .ScheduleForSpace-session.active:hover {
-  background-color: #ff0;
+  height: auto !important;
+}
+.ScheduleForSpace-session .Session-background-image {
+  content: "";
+  background: center center no-repeat;
+  background-size: cover;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  filter: blur(1px);
+}
+.ScheduleForSpace-session:hover .Session-background-image {
+  filter: blur(0px);
+}
+.ScheduleForSpace-session.active::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.30);
+}
+.ScheduleForSpace-session.active:hover::after {
+  background-color: rgba(255, 255, 0, 0.1);
 }
 
+.Session-title,
+.Session-host {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+}
 .Session-title {
   display: block;
   font-weight: bold;
@@ -75,4 +130,5 @@
 }
 .Session-host {
   display: block;
+  font-size: 10px;
 }

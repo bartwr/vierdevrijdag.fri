@@ -19,8 +19,10 @@ class ScheduleHours extends React.Component {
     let list = [];
     for (var i = this.props.startTime; i <= this.props.endTime; i = i + 0.25) {
       list.push(
-        <div key={'hour-'+i} className="ScheduleHours-hour" data-hour={i}>
-          {i % 1 === 0 ? i : ''}
+        <div key={'hour-'+i} className={'ScheduleHours-hour' + (i % 1 == 0 ? ' is-full-hour' : '')} data-hour={i}>
+          <div className="time">
+            {i % 1 === 0 ? i + ':00' : ''}
+          </div>
         </div>
       );
     }
@@ -61,9 +63,13 @@ class ScheduleForSpace extends React.Component {
             className="ScheduleForSpace-session active"
             data-hour={i}
             data-length={session.lengthInMinutes}
-            style={{height: (session.lengthInMinutes / 15 * 5.8) + '%'}}
+            style={{
+              minHeight: (session.lengthInMinutes / 15 * 20) + 'px',
+              height: (session.lengthInMinutes / 15 * 20) + 'px'
+            }}
             onClick={() => this.props.showSessionDetails(session)}
             >
+            <div className="Session-background-image" style={{backgroundImage: `url(${session.image})`}}></div>
             <span className="Session-title">{session.title}</span>
             <span className="Session-host">{session.host}</span>
           </div>
@@ -73,7 +79,7 @@ class ScheduleForSpace extends React.Component {
           skipNumberOfSessionBlocks--;
         } else {
           list.push(
-            <div key={'session-'+i} className="ScheduleForSpace-session" data-hour={i}>
+            <div key={'session-'+i} className={'ScheduleForSpace-session' + (i % 1 == 0 ? ' is-full-hour' : '')} data-hour={i}>
             </div>
           )
         }
@@ -97,7 +103,8 @@ class Day extends React.Component {
   constructor(props) {
     super(props);
 
-    this.spaces = ['Main Space', 'Event Space', 'Lab Space'];
+    // this.spaces = ['Main Space', 'Event Space', 'Lab Space'];
+    this.spaces = ['Main Space', 'Event Space'];
   }
 
   render() {

@@ -9,6 +9,7 @@ class NextMeetup extends Component {
   }
 
   render() {
+    if(! this.props.event) return <div />
     return (
       <a href={this.props.event.url} target="_blank" className="NextMeetup">
         <div className="text--label">

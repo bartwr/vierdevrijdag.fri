@@ -35,13 +35,15 @@ class SessionDetails extends React.Component {
           <div className="SessionDetails-meta">
             <div hidden={this.props.session.host.length <= 0}>Host: {this.props.session.host}</div>
             Space: {this.props.session.space}<br />
-            Start time: {startHour}:{startMinutes.toFixed(0)}<br />
+            Start time: {startHour}:{(startMinutes.toFixed(0) < 10 ? '0' : '') + startMinutes.toFixed(0)}<br />
             Length: {this.props.session.lengthInMinutes} minutes
           </div>
           <div className="SessionDetails-description">
             {this.props.session.description}
           </div>
           {this.props.session.host == 'Esther Van Leeuwe' ? <PaymentButton /> : ''}
+          <br />
+          {this.props.session.image && <img src={this.props.session.image} alt="Session image" style={{width: 'auto', height: 'auto',maxWidth: '100%' } }/>}
         </div>
       </div>
     )

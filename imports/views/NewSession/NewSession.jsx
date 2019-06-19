@@ -14,6 +14,7 @@ class NewSession extends Component {
       description: '',
       startTime: '',
       lengthInMinutes: '',
+      image: '',
       host: '',
       hostEmail: '',
       space: ''
@@ -120,6 +121,7 @@ class NewSession extends Component {
         <label>
           Start time
           <select name="startTime" onChange={this.handleInputChange}>
+            <option value="">Select a start time</option>
             {R.map((time) => <option key={time.decimal} value={time.decimal}>{time.hourly}</option>, this.populateStartTimes())}
           </select>
         </label>
@@ -136,6 +138,10 @@ class NewSession extends Component {
             <option value="Lab Space">Lab Space (max 15 ppl)</option>
             {/*<option value="Discuss Space">Discuss Space (max. 20 ppl)</option>*/}
           </select>
+        </label>
+        <label>
+          Image URL
+          <input type="text" name="image" required value={this.state.image} onChange={this.handleInputChange}  />
         </label>
         <label>
           Name of host (in example: your name)

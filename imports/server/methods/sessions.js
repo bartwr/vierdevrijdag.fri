@@ -9,8 +9,12 @@ Meteor.methods({
       startTime: obj.startTime,
       lengthInMinutes: obj.lengthInMinutes,
       space: obj.space,
+      image: obj.image,
       host: obj.host,
       hostEmail: obj.hostEmail
     });
+  },
+  'sessions.newSessionEmail': function (obj) {
+    
   }
 })
